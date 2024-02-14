@@ -191,9 +191,10 @@
         float a = max(C.r, max(C.g, C.b));
         a = pow(.1 * a, .1);
         a = clamp(a, 0., 1.);
-        gl_FragColor = vec4(1. - C, 1. - a);
+        gl_FragColor = vec4(C, 1. - a);  // Change '1. - C' to 'C' to make it black
     }
 </script>
+
 <script src="main.js"></script>
 </html>
     
