@@ -15,11 +15,11 @@ app.get("/" , (req , res) => {
     res.set({
         "Allow-access-Allow-Origin" : "*"
     })
-    return res.redirect("index.html")
+    return res.redirect("./signin.html")
 })
 
 app.post("/signup", async (req, res) => {
-    var username = req.body.username;
+    var usernamemain = req.body.username;
     var password = req.body.password;
     var confirmPassword = req.body.confirmPassword;
   
@@ -27,7 +27,7 @@ app.post("/signup", async (req, res) => {
       const hashedPassword = await bcrypt.hash(password, 10);
   
       var data = {
-        username: username,
+        username: usernamemain,
         password: hashedPassword,
       };
   
@@ -37,13 +37,37 @@ app.post("/signup", async (req, res) => {
           res.status(500).send("Error signing up");
         } else {
           console.log("User signed up successfully");
-          res.redirect("./index.html");
+          res.redirect("./signin.html");
         }
       });
     } else {
       res.status(400).send("Password not matching");
     }
   });
+
+app.post("/signin" , async (req , res) => {
+  var usernamemain = req.body.username
+  var passwords = req.body.password
+  var dbstored = await marvel.collection("users").find({}).toArray()
+  console.log(usernamemain)
+  console.log(dbstored)
+  console.log(passwords)
+  for (var i = 0 ; i < dbstored.length ; i++){
+    var ele = dbstored[i]
+    try{
+      if (dbstored){
+        var pass = await bcrypt.compare(passwords , ele.password)
+        if(pass == true){
+          res.send("logged in")
+        }
+      }
+      res.send("incorrect login details")
+    }
+    catch(err){
+      console.log(err)
+    }
+  }
+})
   
 
 app.listen(200 , () => {
