@@ -3,19 +3,6 @@ html, body {
     padding: 0;
     margin: 0;
 }
-#parent{position: relative}
-.Logo{
-	position: fixed;
-	width: 50%;
-	height: 50%;
-	y: 500px;
-	z: 10px;
-	top: 0;
-	left: 0;
-	padding: 10px;
-	
-	
-}
 
 canvas {
     position: fixed;
@@ -100,6 +87,10 @@ body {
   background: #111;
   width: 100%;
   overflow: hidden;
+}
+
+.btn{
+  color: black;
 }
 .ring {
   position: relative;
