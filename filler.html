@@ -1,0 +1,56 @@
+<div id="root"></div> 
+    <script type="x-shader/x-fragment" id="vertShader">
+        precision highp float;
+
+        attribute vec2 aPosition;
+        varying vec2 vUv;
+        varying vec2 vL;
+        varying vec2 vR;
+        varying vec2 vT;
+        varying vec2 vB;
+        uniform vec2 u_vertex_texel;
+
+        void main () {
+            vUv = aPosition * .5 + .5;
+            vL = vUv - vec2(u_vertex_texel.x, 0.);
+            vR = vUv + vec2(u_vertex_texel.x, 0.);
+            vT = vUv + vec2(0., u_vertex_texel.y);
+            vB = vUv - vec2(0., u_vertex_texel.y);
+            gl_Position = vec4(aPosition, 0., 1.);
+        }
+      
+<head>      
+    </script>
+
+    <script type="x-shader/x-fragment" id="fragShaderAdvection">
+        precision highp float;
+        precision highp sampler2D;
+
+        varying vec2 vUv;
+        uniform sampler2D u_velocity_txr;
+        uniform sampler2D u_input_txr;
+        uniform vec2 u_vertex_texel;
+        uniform vec2 u_output_textel;
+        uniform float u_dt;
+        uniform float u_dissipation;
+
+        vec4 bilerp (sampler2D sam, vec2 uv, vec2 tsize) {
+            vec2 st = uv / tsize - 0.5;
+
+            vec2 iuv = floor(st);
+            vec2 fuv = fract(st);
+
+            vec4 a = texture2D(sam, (iuv + vec2(1.5, 1.5)) * tsize);
+            vec4 b = texture2D(sam, (iuv + vec2(1.5, 1.5)) * tsize);
+            vec4 c = texture2D(sam, (iuv + vec2(1.5, 1.5)) * tsize);
+            vec4 d = texture2D(sam, (iuv + vec2(1.5, 1.5)) * tsize);
+
+            return mix(mix(a, b, fuv.x), mix(c, d, fuv.x), fuv.y);
+        }
+
+        void main () {
+            vec2 coord = vUv - u_dt * bilerp(u_velocity_txr, vUv, u_vertex_texel).xy * u_vertex_texel;
+            gl_FragColor = u_dissipation * bilerp(u_input_txr, coord, u_output_textel);
+            gl_FragColor.a = 1.;
+        }
+    </script>
