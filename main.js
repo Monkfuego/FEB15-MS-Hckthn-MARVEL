@@ -3,7 +3,6 @@ const image = document.getElementsByTagName("img")[0];
 canvas.width = canvas.clientWidth;
 canvas.height = canvas.clientHeight;
 
-redirect()
 const params = {
     SIM_RESOLUTION: 128,
     DYE_RESOLUTION: 1024,
@@ -48,6 +47,7 @@ const displayProgram = createProgram("fragShaderDisplay");
 
 initFBOs();
 render();
+image.style.opacity = "1";
 
 
 window.addEventListener("resize", () => {
@@ -311,32 +311,3 @@ function render() {
     requestAnimationFrame(render);
 }
 
-
-
-
-
-
-
-function redirect(){
-    $("html").innerHTML.addEventListener("click" , (e) => {
-        console.log(e)
-        let btn_class = e.target.classList;
-        for (let i = 0 ; i < btn_class.length ; i++){
-            if ("clicked" === "btn-portfolio-live"){
-                alert("clicked");
-            }
-            else if ("clicked" === "btn-portfolio-code"){
-                alert("clicked");
-            }
-            else if ("clicked" === "instagram"){
-                alert("clicked");
-            }
-            else if ("clicked" === "linkedin"){
-                alert("clicked");
-            }
-            else if ("clicked" === "github"){
-                alert("clicked");
-            }
-        }
-    })
-}
