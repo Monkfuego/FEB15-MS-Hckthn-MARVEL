@@ -113,7 +113,3 @@ var imgs4 = {
   id : 4,
   image : base64Image4
 }
-users.create(imgs1)
-users.create(imgs2)
-users.create(imgs3)
-users.create(imgs4)
