@@ -9,10 +9,8 @@ var app = express();
 app.use(express.static(__dirname + "/"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-// Inside app.js 
 
 
-// Session middleware with a random secret key and MongoDB store
 var fs = require("fs")
 var image1 = fs.readFileSync("RDT_20240215_181550740786580592949787.jpg")
 var image2 = fs.readFileSync("RDT_20240215_1813402010455412332883482.jpg")
@@ -41,7 +39,7 @@ app.get("/", (req, res) => {
   return res.redirect("/signin.html");
 });
 
-// Signup route
+
 app.post("/signup", async (req, res) => {
   var username = req.body.username;
   var password = req.body.password;
