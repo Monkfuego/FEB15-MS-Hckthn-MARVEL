@@ -2,8 +2,6 @@ var bodyParser = require("body-parser");
 var express = require("express");
 const formData = require('form-data');
 const Mailgun = require('mailgun.js');
-const mailgun = new Mailgun(formData);
-const mg = mailgun.client({username: "api" , key: process.env.MAIL_API , domain : "sandbox7765987b14e644888c4e6f947a56f60c.mailgun.org"});
 var bcrypt = require("bcrypt");
 var mongoose = require("mongoose");
 require("dotenv").config();
