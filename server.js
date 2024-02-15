@@ -32,7 +32,6 @@ var imageSchema = new mongoose.Schema({
 });
 
 var users = mongoose.model("users", userSchema);
-var images = mongoose.model("buying" , imageSchema)
 app.get("/", (req, res) => {
   res.set({
     "Allow-access-Allow-Origin": "*",
@@ -96,20 +95,3 @@ var PORT = process.env.PORT || 200;
 app.listen(PORT, () => {
   console.log("Server is running on port", PORT);
 });
-
-var imgs1 = {
-  id : 1,
-  image : base64Image1
-}
-var imgs2 = {
-  id : 2,
-  image : base64Image2
-}
-var imgs3 = {
-  id : 3,
-  image : base64Image3
-}
-var imgs4 = {
-  id : 4,
-  image : base64Image4
-}
