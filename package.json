@@ -2,9 +2,10 @@
   "name": "feb15-ms-hckthn-marvel",
   "version": "1.0.0",
   "description": "",
-  "main": "main.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build" : "npm install bcrypt body-parser dotenv ejs express http mongoose"
   },
   "author": "",
   "license": "ISC",
