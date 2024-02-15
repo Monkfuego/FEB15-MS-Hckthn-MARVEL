@@ -5,12 +5,11 @@ var bcrypt = require("bcrypt")
 var mongoose = require("mongoose")
 app.use(express.static(__dirname + "/"))
 app.use(bodyparser.json())
+require("dotenv").config()
+var PORT = process.env.PORT || 200
+var users = require("./models/users")
 app.use(bodyparser.urlencoded({extended : true}))
-var marvel = mongoose.connection
-mongoose.connect("mongodb://0.0.0.0:27017/marvel", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+mongoose.connect(process.env.MONGO_URI);
 app.get("/" , (req , res) => {
     res.set({
         "Allow-access-Allow-Origin" : "*"
@@ -22,6 +21,8 @@ app.post("/signup", async (req, res) => {
     var usernamemain = req.body.username;
     var password = req.body.password;
     var confirmPassword = req.body.confirmPassword;
+    var mail = req.body.email
+
   
     if (toString(password) === toString(confirmPassword)) {
       const hashedPassword = await bcrypt.hash(password, 10);
@@ -29,17 +30,16 @@ app.post("/signup", async (req, res) => {
       var data = {
         username: usernamemain,
         password: hashedPassword,
+        email : mail  
+        
       };
-  
-      marvel.collection("users").insertOne(data, async (err, collection) => {
-        if (err) {
-          console.error(err);
-          res.status(500).send("Error signing up");
-        } else {
-          console.log("User signed up successfully");
-          res.redirect("./signin.html");
-        }
-      });
+      try{
+      await users.insertMany(data)
+      res.redirect("./signin.html")
+      }
+      catch (err){
+        throw err
+      }
     } else {
       res.status(400).send("Password not matching");
     }
@@ -48,7 +48,7 @@ app.post("/signup", async (req, res) => {
 app.post("/signin" , async (req , res) => {
   var usernamemain = req.body.username
   var passwords = req.body.password
-  var dbstored = await marvel.collection("users").find({}).toArray()
+  var dbstored = await user.find({}).toArray()
   console.log(usernamemain)
   console.log(dbstored)
   console.log(passwords)
@@ -57,7 +57,7 @@ app.post("/signin" , async (req , res) => {
     try{
       if (dbstored){
         var pass = await bcrypt.compare(passwords , ele.password)
-        if(pass == true){
+        if(pass == true && type){
           res.send("logged in")
         }
       }
@@ -70,6 +70,6 @@ app.post("/signin" , async (req , res) => {
 })
   
 
-app.listen(200 , () => {
+app.listen(PORT , () => {
     console.log("server")
 })
