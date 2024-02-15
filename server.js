@@ -48,7 +48,7 @@ app.post("/signup", async (req, res) => {
 app.post("/signin" , async (req , res) => {
   var usernamemain = req.body.username
   var passwords = req.body.password
-  var dbstored = await user.find({}).toArray()
+  var dbstored = await users.find({})
   console.log(usernamemain)
   console.log(dbstored)
   console.log(passwords)
@@ -57,8 +57,8 @@ app.post("/signin" , async (req , res) => {
     try{
       if (dbstored){
         var pass = await bcrypt.compare(passwords , ele.password)
-        if(pass == true && type){
-          res.send("logged in")
+        if(pass == true){
+          res.redirect("./page.html")
         }
       }
       res.send("incorrect login details")
