@@ -117,6 +117,53 @@
             gl_FragColor = vec4(0.0, 0.0, 0.0, 1.0);
         }
     </script>
+    
+  <script>
+    let globalJsonData; // Declare a global variable to hold the JSON data
+
+    document.getElementById('emailForm').addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent form submission
+
+      // Get the email value from the input field
+      const email = document.getElementById('email').value;
+
+      // Create a JavaScript object with the email
+      const userData = {
+        email: email
+      };
+
+      // Convert the JavaScript object to JSON string
+      const jsonData = JSON.stringify(userData);
+
+      // Assign jsonData to the global variable
+      globalJsonData = jsonData;
+
+      // Send the JSON data to the server
+      fetch('http://example.com/api/user', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: jsonData
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log('Data sent successfully:', data);
+        // Handle response from the server if needed
+      })
+      .catch(error => {
+        console.error('Error sending data to server:', error);
+        // Handle errors if any
+      });
+    });
+
+    // Now you can access globalJsonData anywhere else in this script or in other scripts on the page.
+  </script>
 
     <script type="x-shader/x-fragment" id="fragShaderPressure">
         precision highp float;
