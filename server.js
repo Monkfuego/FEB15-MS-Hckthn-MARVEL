@@ -14,10 +14,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Session middleware with a random secret key and MongoDB store
 var fs = require("fs")
-var image1 = fs.readFileSync("RDT_20240215_181550740786580592949787.jpg")
-var image2 = fs.readFileSync("RDT_20240215_1813402010455412332883482.jpg")
-var image3 = fs.readFileSync("RDT_20240215_181550740786580592949787.jpg")
-var image4 = fs.readFileSync("RDT_20240215_1813402010455412332883482.jpg")
+var image1 = fs.readFileSync("./public/RDT_20240215_181550740786580592949787.jpg")
+var image2 = fs.readFileSync("./public/RDT_20240215_1813402010455412332883482.jpg")
+var image3 = fs.readFileSync("./public/RDT_20240215_181550740786580592949787.jpg")
+var image4 = fs.readFileSync("./public/RDT_20240215_1813402010455412332883482.jpg")
 
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
