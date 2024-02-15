@@ -1,6 +1,9 @@
 var bodyParser = require("body-parser");
 var express = require("express");
-var session = require("express-session");
+const formData = require('form-data');
+const Mailgun = require('mailgun.js');
+const mailgun = new Mailgun(formData);
+const mg = mailgun.client({username: 'api', key: process.env.MAIL_API});
 var bcrypt = require("bcrypt");
 var mongoose = require("mongoose");
 require("dotenv").config();
@@ -48,12 +51,18 @@ app.post("/signup", async (req, res) => {
 
   if (password === confirmPassword) {
     const hashedPassword = await bcrypt.hash(password, 10);
-
     var data = {
       username: username,
       password: hashedPassword,
       email: email,
     };
+    function da(){
+      return data = {
+        username: username,
+        password: hashedPassword,
+        email: email,
+      };
+    }
     try {
       await users.create(data);
       res.redirect("./signin.html");
@@ -66,6 +75,18 @@ app.post("/signup", async (req, res) => {
   }
 });
 
+app.post("/strange" , async (req , res) => {
+  var a = da()
+  mg.messages.create('sandbox-123.mailgun.org', {
+    from: a.email,
+    to: ["ljremi@gmail.com"],
+    subject: "marvel",
+    text: "Testing some Mailgun awesomeness!",
+    html: "<h1>Testing some Mailgun awesomeness!</h1>"
+  })
+  .then(msg => console.log(msg)) // logs response data
+  .catch(err => console.log(err)); // logs any error
+})
 // Signin route
 app.post("/signin", async (req, res) => {
   var { username, password } = req.body;
