@@ -56,13 +56,6 @@ app.post("/signup", async (req, res) => {
       password: hashedPassword,
       email: email,
     };
-    function da(){
-      return data = {
-        username: username,
-        password: hashedPassword,
-        email: email,
-      };
-    }
     try {
       await users.create(data);
       res.redirect("./signin.html");
@@ -75,19 +68,6 @@ app.post("/signup", async (req, res) => {
   }
 });
 
-app.post("/strange" , async (req , res) => {
-  var a = da()
-  mg.messages.create('sandbox-123.mailgun.org', {
-    from: a.email,
-    to: ["ljremi@gmail.com"],
-    subject: "marvel",
-    text: "Testing some Mailgun awesomeness!",
-    html: "<h1>Testing some Mailgun awesomeness!</h1>"
-  })
-  .then(msg => console.log(msg)) // logs response data
-  .catch(err => console.log(err)); // logs any error
-})
-// Signin route
 app.post("/signin", async (req, res) => {
   var { username, password } = req.body;
   try {
