@@ -49,16 +49,14 @@ app.post("/signin" , async (req , res) => {
   var usernamemain = req.body.username
   var passwords = req.body.password
   var dbstored = users.find({})
-  console.log(usernamemain)
-  console.log(dbstored)
-  console.log(passwords)
   for (var i = 0 ; i < dbstored.length ; i++){
     var ele = dbstored[i]
     try{
       if (dbstored){
         var pass = await bcrypt.compare(passwords , ele.password)
+        console.log(pass)
         if(pass == true){
-          res.redirect("./page.html")
+          res.redirect("signed in")
         }
       }
       res.redirect("signin.html")
