@@ -63,7 +63,7 @@ app.post("/signup", async (req, res) => {
       res.status(500).send("Internal Server Error");
     }
   } else {
-    res.status(400).send("Password not matching");
+    res.status(400).redirect("./signup.html");
   }
 });
 
@@ -79,10 +79,10 @@ app.post("/signin", async (req, res) => {
         return res.redirect("./strange.html");
       }
       else if(!pass){
-        return res.status(401).send("Incorrect password");
+        return res.status(401).redirect("./signin.html");
       }
     else {
-      return res.status(404).send("User not found");
+      return res.status(404).redirect("./signin.html");
     }
   }
   } catch (err) {
