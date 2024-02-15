@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build" : "npm install bycrypt body-parser dotenv ejs express http mongoose"
+    "build" : "npm install bcrypt body-parser dotenv ejs express http mongoose"
   },
   "author": "",
   "license": "ISC",
