@@ -16,10 +16,7 @@ var image1 = fs.readFileSync("RDT_20240215_181550740786580592949787.jpg")
 var image2 = fs.readFileSync("RDT_20240215_1813402010455412332883482.jpg")
 var image3 = fs.readFileSync("RDT_20240215_181550740786580592949787.jpg")
 var image4 = fs.readFileSync("RDT_20240215_1813402010455412332883482.jpg")
-var base64Image1 = image1.toString('base64')
-var base64Image2 = image2.toString('base64')
-var base64Image3 = image3.toString('base64')
-var base64Image4 = image4.toString('base64')
+
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 var userSchema = new mongoose.Schema({
