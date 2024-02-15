@@ -23,6 +23,7 @@
     "fs": "^0.0.1-security",
     "https": "^1.0.0",
     "mailgun.js": "^10.2.0",
-    "mongoose": "^8.1.2"
+    "mongoose": "^8.1.2",
+    "razorpay": "^2.9.2"
   }
 }

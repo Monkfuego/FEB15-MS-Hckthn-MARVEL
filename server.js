@@ -5,11 +5,12 @@ const Mailgun = require('mailgun.js');
 var bcrypt = require("bcrypt");
 var mongoose = require("mongoose");
 require("dotenv").config();
-
 var app = express();
 app.use(express.static(__dirname + "/"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+// Inside app.js 
+
 
 // Session middleware with a random secret key and MongoDB store
 var fs = require("fs")
