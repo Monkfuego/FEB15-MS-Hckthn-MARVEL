@@ -9,10 +9,7 @@ require("dotenv").config()
 var PORT = process.env.PORT || 200
 var users = require("./models/users")
 app.use(bodyparser.urlencoded({extended : true}))
-var m = async function (){
-  await mongoose.connect(process.env.MONGO_URI);
-}
-m()
+mongoose.connect(process.env.MONGO_URI)
 app.get("/" , (req , res) => {
     res.set({
         "Allow-access-Allow-Origin" : "*"

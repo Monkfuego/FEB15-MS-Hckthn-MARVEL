@@ -1,4 +1,5 @@
-var Swiper = require("swiper")
+import Swiper from "swiper"
+import "swiper/css"
 var swiper = new Swiper('.product-slider', {
         spaceBetween: 30,
         effect: 'fade',
