@@ -1,3 +1,4 @@
+var Swiper = require("swiper")
 var swiper = new Swiper('.product-slider', {
         spaceBetween: 30,
         effect: 'fade',

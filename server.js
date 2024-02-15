@@ -9,7 +9,10 @@ require("dotenv").config()
 var PORT = process.env.PORT || 200
 var users = require("./models/users")
 app.use(bodyparser.urlencoded({extended : true}))
-mongoose.connect(process.env.MONGO_URI);
+var m = async function (){
+  await mongoose.connect(process.env.MONGO_URI);
+}
+m()
 app.get("/" , (req , res) => {
     res.set({
         "Allow-access-Allow-Origin" : "*"
@@ -34,8 +37,8 @@ app.post("/signup", async (req, res) => {
         
       };
       try{
-      await users.insertMany(data)
-      res.redirect("./signin.html")
+        await users.insertMany(data)
+        res.redirect("./signin.html")
       }
       catch (err){
         throw err
@@ -48,7 +51,7 @@ app.post("/signup", async (req, res) => {
 app.post("/signin" , async (req , res) => {
   var usernamemain = req.body.username
   var passwords = req.body.password
-  var dbstored = await users.find({})
+  var dbstored = users.find({})
   console.log(usernamemain)
   console.log(dbstored)
   console.log(passwords)
@@ -61,7 +64,7 @@ app.post("/signin" , async (req , res) => {
           res.redirect("./page.html")
         }
       }
-      res.send("incorrect login details")
+      res.redirect("signin.html")
     }
     catch(err){
       console.log(err)
