@@ -48,7 +48,7 @@ app.post("/signup", async (req, res) => {
   var confirmPassword = req.body.confirmPassword;
   var email = req.body.email;
 
-  if (password === confirmPassword) {
+  if (toString(password) === toString(confirmPassword)) {
     const hashedPassword = await bcrypt.hash(password, 10);
     var data = {
       username: username,
