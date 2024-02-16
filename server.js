@@ -9,14 +9,6 @@ var app = express();
 app.use(express.static(__dirname + "/"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
-
-var fs = require("fs")
-var image1 = fs.readFileSync("RDT_20240215_181550740786580592949787.jpg")
-var image2 = fs.readFileSync("RDT_20240215_1813402010455412332883482.jpg")
-var image3 = fs.readFileSync("RDT_20240215_181550740786580592949787.jpg")
-var image4 = fs.readFileSync("RDT_20240215_1813402010455412332883482.jpg")
-
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 var userSchema = new mongoose.Schema({
@@ -25,14 +17,9 @@ var userSchema = new mongoose.Schema({
   email: String,
 });
 
-var imageSchema = new mongoose.Schema({
-  id : Number,
-  image : String,
-  dec : String
-});
 
 var users = mongoose.model("users", userSchema);
-app.get("/", (req, res) => {
+app.get("/", async (req, res) => {
   res.set({
     "Allow-access-Allow-Origin": "*",
   });
@@ -69,8 +56,6 @@ app.post("/signin", async (req, res) => {
   var { username, password } = req.body;
   try {
     var user = await users.findOne({ username: username });
-    module.exports = user
-
     if (user) {
       var pass = await bcrypt.compare(password, user.password);
       if (pass) {
@@ -90,6 +75,6 @@ app.post("/signin", async (req, res) => {
 });
 
 var PORT = process.env.PORT || 200;
-app.listen(PORT, () => {
+app.listen(PORT, async () => {
   console.log("Server is running on port", PORT);
 });
