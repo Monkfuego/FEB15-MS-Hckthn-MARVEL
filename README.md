@@ -33,3 +33,4 @@
 - Razorpay API (for payment gateway integration)
 - Psyclick for deployment
 - Cyclic.ash (for cyclic task scheduling)
+- Sampler 2D
