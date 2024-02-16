@@ -46,7 +46,7 @@ app.post("/signup", async (req, res) => {
       res.status(500).send("Internal Server Error");
     }
   } else {
-    res.status(400).redirect("./signup.html");
+    res.redirect("./signup.html");
   }
 });
 
@@ -73,6 +73,6 @@ app.post("/signin", async (req, res) => {
 });
 
 var PORT = process.env.PORT || 200;
-app.listen(PORT, async () => {
+app.listen(PORT, () => {
   console.log("Server is running on port", PORT);
 });
