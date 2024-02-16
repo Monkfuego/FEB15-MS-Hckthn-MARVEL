@@ -8,7 +8,7 @@
 
 ## Homepage for Customers:
 - Carousel display of best selling paintings of the month after successful login.
-- Preview of each artwork with price (in rupees and dollars), discounts, and "add to cart" option.
+- Preview of each artwork with price (in rupees and dollars)and discounts option.
 - Sorting options available based on price, rating, and cost.
 
 ## Order Page for Customers:
