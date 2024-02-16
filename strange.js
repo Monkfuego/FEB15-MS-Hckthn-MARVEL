@@ -5,8 +5,7 @@ document.addEventListener("DOMContentLoaded", () =>{
 	mouse.style.display="none";
 	this.addEventListener('mousemove', (e)=>{
 		mouse.style.display="block";
-		// click.style.visibility="visible";
-	// console.log(e.clientX)
+
 	let X = e.clientX;
 	let Y = e.clientY;
 	let left = 	mouse.style.left = X -14+'px';
@@ -27,11 +26,11 @@ document.addEventListener("DOMContentLoaded", () =>{
 		this.addEventListener("mouseout", function(e) {
 			if(!e.relatedTarget){
 			mouse.style.display="none";
-			// click.style.visibility ="hidden";
+
 
 			}else{
 				mouse.style.display ="block";
-				// click.style.visibility ="visible";
+
 			}
 		});
 
