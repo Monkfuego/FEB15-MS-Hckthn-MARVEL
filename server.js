@@ -1,7 +1,5 @@
 var bodyParser = require("body-parser");
 var express = require("express");
-const formData = require('form-data');
-const Mailgun = require('mailgun.js');
 var bcrypt = require("bcrypt");
 var mongoose = require("mongoose");
 require("dotenv").config();
